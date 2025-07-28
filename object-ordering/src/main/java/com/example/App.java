@@ -41,7 +41,10 @@ public class App {
 		// que utilizara el metodo sort como criterio de comparacion
 		// Y nuestra clase persona no implementa todavia dicha interfaz
 		
-//		Collections.sort(personas);
+		Collections.sort(personas);
+		
+		System.out.println("Listado de Persona ordenado según el orden Natural de la clase Persona");
+		System.out.println(personas);
 		
 	}
 }

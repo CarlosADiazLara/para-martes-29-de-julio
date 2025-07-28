@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.plaf.multi.MultiLabelUI;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class Persona {
+public class Persona implements Comparable<Persona>{
 
 	private String nombre;
 	private String primerApellido;
@@ -30,8 +32,8 @@ public class Persona {
 		List<Persona> personas = new ArrayList<Persona>();
 
 		Persona persona1 = Persona.builder().nombre("Belepo")
-				.primerApellido("Biriba")
-				.segundoApellido("Bokesa")
+				.primerApellido("Diaz")
+				.segundoApellido("Lara")
 				.genero(Genero.HOMBRE)
 				.fechaNacimiento(LocalDate.of(1977, Month.JUNE, 24))
 				.estatura(1.80)
@@ -100,7 +102,7 @@ public class Persona {
 				.build();
 
 		Persona persona9 = Persona.builder()
-				.nombre("Ramon Eduardo")
+				.nombre("Antonio Eduardo")
 				.primerApellido("Hernandez")
 				.segundoApellido("Castillo")
 				.genero(Genero.HOMBRE)
@@ -129,4 +131,17 @@ public class Persona {
 		
 		return personas;
 	}
+
+@Override
+public int compareTo(Persona persona) {
+	// El criterio de comparacion u ordenamiento de dos personas, de la lñista de personas
+	// va a ser, primero por el primer apellido, luego por el segundo apellido y por ultimo
+	// el nombre
+	int cmpPrimerApellido = this.primerApellido.compareTo(persona.getPrimerApellido());
+	int cmpSegundoApellido = this.segundoApellido != null ? this.segundoApellido.compareTo(persona.getSegundoApellido()) : 0;
+	int cmpNombre = this.nombre.compareTo(persona.getNombre());
+	
+	return cmpPrimerApellido != 0 ? cmpPrimerApellido : cmpSegundoApellido != 0 ? cmpSegundoApellido 
+			: cmpNombre;
+}
 }
